@@ -39,7 +39,7 @@ body {
   border: none;
   border-bottom: 1px solid rgb(175, 172, 172);
   padding: 5px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   outline: none;
 }
 
@@ -48,6 +48,7 @@ body {
 }
 
 .column form input:last-child {
+  margin-bottom: 10px;
   background-color: rgb(47, 126, 245);
   color: white;
   border-radius: 5px;
@@ -66,4 +67,9 @@ body {
   font-size: 15px;
   color: rgb(58, 54, 54);
   text-decoration: none;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 13px;
 }

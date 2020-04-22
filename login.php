@@ -1,8 +1,25 @@
 <?php
-if (isset($_POST["submitButton"])) {
-    echo $_POST["firstName"];
-}
+require_once "includes/config.php";
+require_once "includes/classes/FormSanitizer.php"; //include class
+require_once "includes/classes/Constants.php";
+require_once "includes/classes/Account.php";
 
+$account = new Account($con);
+
+if (isset($_POST["submitButton"])) {
+    $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+
+    $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+
+    $success = $account->logIn($username, $password);
+
+    if ($success) {
+        //store session
+        //code here
+
+        header("Location: index.php"); //redirect page
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +45,9 @@ if (isset($_POST["submitButton"])) {
                 <input type="text" name="username" placeholder="Username" required>
 
                 <input type="password" name="password" placeholder="Password" required>
+                <?php echo $account->getError(Constants::$loginFailed); ?>
+
+
                 <input type="submit" name="submitButton" value="SUBMIT">
             </form>
 
