@@ -15,11 +15,19 @@ if (isset($_POST["submitButton"])) {
 
     if ($success) {
         //store session
-        //code here
+        $_SESSION["userLoggedIn"] = $username; //storing session variable(userLoggedIn) as $username
 
         header("Location: index.php"); //redirect page
     }
 }
+
+function getInputValue($name)
+{
+    if (isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +50,7 @@ if (isset($_POST["submitButton"])) {
 
             <form method="POST">
 
-                <input type="text" name="username" placeholder="Username" required>
+                <input type="text" name="username" placeholder="Username" value="<?php getInputValue("username");?>" required>
 
                 <input type="password" name="password" placeholder="Password" required>
                 <?php echo $account->getError(Constants::$loginFailed); ?>
